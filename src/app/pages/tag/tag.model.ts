@@ -1,0 +1,15 @@
+
+export interface ITag {
+
+  id?: number;
+  name: string;
+}
+
+export class Tag implements ITag {
+
+  constructor(
+    public name: string,
+    public id?: number
+  ) {
+  }
+}
