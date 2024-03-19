@@ -21,8 +21,9 @@ class AuthUtils {
   }
 
   setLoggedCredentials(user: User, jwtAuthenticationResponse: JwtAuthenticationResponse) {
-    if (user)
+    if (user) {
       sessionStorage.setItem('authUser', JSON.stringify(user));
+    }
     if (jwtAuthenticationResponse) {
       this.setAccessToken(jwtAuthenticationResponse.accessToken);
       this.setRefreshToken(jwtAuthenticationResponse.refreshToken);
@@ -47,12 +48,7 @@ class AuthUtils {
     }
     return JSON.parse(authUserString) as User;
   }
-
-  /**
-   * Handle the error
-   * @param {*} error
-   */
-  _handleError(error) {
+  handleError(error) {
     return error.message;
   }
 
@@ -62,6 +58,9 @@ class AuthUtils {
 
   currentUserValue() {
     return this.getAuthenticatedUser();
+  }
+  getRefrechToken() {
+    return sessionStorage.getItem('refresh_token') ?? null;
   }
 }
 

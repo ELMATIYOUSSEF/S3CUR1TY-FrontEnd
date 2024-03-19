@@ -16,14 +16,15 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const currentUser = authUtils.currentUserValue();
-        if (currentUser) {
+        const access_token = authUtils.currentAccessToken();
+
+        if (access_token) {
             // logged in so return true
             return true;
         }
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url } });
+        this.router.navigate(['/account/auth/login'], { queryParams: { returnUrl: state.url } });
         return false;
     }
 }

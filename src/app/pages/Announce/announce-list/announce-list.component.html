@@ -1,0 +1,331 @@
+<div class="container-fluid">
+    <app-page-title title="Announce" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">Icon Wizard</h4>
+            <aw-wizard [navBarLayout]="'large-empty-symbols'">
+              <aw-wizard-step>
+                <ng-template awWizardStepSymbol>
+                  <i class="bx bxs-detail"></i>
+                </ng-template>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+
+                        <h4 class="card-title">Announce </h4>
+                        <p class="card-title-desc">Fill all information below</p>
+
+                        <form [formGroup]="AnnounceForm" (ngSubmit)="GetAnnounceInfo()">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <div class="mb-3">
+                                <label for="Title">Title</label>
+                                <input id="Title" name="Title" type="text" class="form-control"
+                                       formControlName="title" [ngClass]="{'is-invalid': submitted &&
+                                     AnnounceData?.title?.errors}">
+                                <div *ngIf="submitted && AnnounceData.title?.errors" class="invalid-feedback">
+                                  <span *ngIf="AnnounceData.title?.errors.required">Title brand is required.</span>
+                                </div>
+                              </div>
+
+                              <div class="mb-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <h4 class="card-title mb-3">Description</h4>
+                                      <ckeditor [editor]="Editor"
+                                                (blur)="onBlurDescription($event)"
+                                                [data]="description"
+                                                [ngClass]="{'is-invalid': submitted && AnnounceData.Description?.errors}">
+                                      </ckeditor>
+                                      <div *ngIf="submitted && AnnounceData.Description?.errors" class="invalid-feedback">
+                                        <span *ngIf="AnnounceData.Description?.errors.required">Description is required.</span>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="mb-3">
+                                <label for="price">Price</label>
+                                <input id="price" name="price" type="number" class="form-control" formControlName="price" [ngClass]="{'is-invalid': submitted &&
+                                      AnnounceData.price?.errors}">
+                                <div *ngIf="submitted && AnnounceData.price?.errors" class="invalid-feedback">
+                                  <span *ngIf="AnnounceData.price?.errors.required">Price is required.</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <ul class="list-inline wizard mb-0">
+                          <li class="next list-inline-item float-end"><button (click)="AnnounceFirstData()"  class="btn btn-primary" awNextStep>Next</button>
+                          </li>
+                        </ul>
+                         <!-- <div class="d-flex flex-wrap gap-2 mt-2">
+                            <button (click)="AnnounceFirstData()"  class="btn btn-primary" >Save</button>
+                          </div>-->
+                        </form>
+                      </div>
+                    </div>
+
+                    </div>
+                </div>
+
+              </aw-wizard-step>
+
+              <aw-wizard-step>
+                <ng-template awWizardStepSymbol>
+                  <i class="bx bxs-building-house"></i>
+                </ng-template>
+                <div class="row">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Announce Information</h4>
+                      <p class="card-title-desc">Fill all information below</p>
+
+                      <form [formGroup]="InfoForm" (ngSubmit)="onSubmit2()" class="d-flex justify-content-around " >
+
+                       <div class="col-md-4">
+                         <div class="mb-3 row align-items-center">
+                           <div class="col-md-6">
+                             <label for="phone">Phone</label>
+                             <input id="phone" name="phone" type="text" class="form-control" formControlName="phone"
+                                    [ngClass]="{'is-invalid': submitted2 && InfoData.phone.errors}">
+                             <div *ngIf="submitted2 && InfoData.phone.errors" class="invalid-feedback">
+                               <span *ngIf="InfoData.phone.errors.required">Phone is required.</span>
+                             </div>
+                           </div>
+                           <div class="col-md-6 text-md-right">
+                             <label for="switch" class="mr-4">Show Phone :</label>
+                             <ui-switch defaultBoColor="#dfdfdf" formControlName="visiblePhone" color="#00b19d" id="switch" checked></ui-switch>
+                           </div>
+                         </div>
+
+                         <div class="mb-3">
+                           <label for="numBain">Number of Bathrooms</label>
+                           <input id="numBain" name="numBain" type="number" class="form-control" formControlName="numBain"
+                                  [ngClass]="{'is-invalid': submitted2 && InfoData.numBain.errors}">
+                           <div *ngIf="submitted2 && InfoData.numBain.errors" class="invalid-feedback">
+                             <span *ngIf="InfoData.numBain.errors.required">Number of bathrooms is required.</span>
+                           </div>
+                         </div>
+
+                         <div class="mb-3">
+                           <label for="numChambers">Number of Chambers</label>
+                           <input id="numChambers" name="numChambers" type="number" class="form-control" formControlName="numChambers"
+                                  [ngClass]="{'is-invalid': submitted2 && InfoData.numChambers.errors}">
+                           <div *ngIf="submitted2 && InfoData.numChambers.errors" class="invalid-feedback">
+                             <span *ngIf="InfoData.numChambers.errors.required">Number of Chambers is required.</span>
+                           </div>
+                         </div>
+
+                         <div class="mb-3">
+                           <label for="numSalons">Number of Salons</label>
+                           <input id="numSalons" name="numSalons" type="number" class="form-control" formControlName="numSalons"
+                                  [ngClass]="{'is-invalid': submitted2 && InfoData.numSalons.errors}">
+                           <div *ngIf="submitted2 && InfoData.numSalons.errors" class="invalid-feedback">
+                             <span *ngIf="InfoData.numSalons.errors.required">Number of Salons is required.</span>
+                           </div>
+                         </div>
+
+                         <div class="mb-3">
+                           <label for="numCuisine">Number of Kitchens</label>
+                           <input id="numCuisine" name="numCuisine" type="number" class="form-control" formControlName="numCuisine"
+                                  [ngClass]="{'is-invalid': submitted2 && InfoData.numCuisine.errors}">
+                           <div *ngIf="submitted2 && InfoData.numCuisine.errors" class="invalid-feedback">
+                             <span *ngIf="InfoData.numCuisine.errors.required">Number of kitchens is required.</span>
+                           </div>
+                         </div>
+
+                         <div class="mb-3">
+                           <label for="floor">Floor</label>
+                           <input id="floor" name="floor" type="number" class="form-control" formControlName="floor"
+                                  [ngClass]="{'is-invalid': submitted2 && InfoData.floor.errors}">
+                           <div *ngIf="submitted2 && InfoData.floor.errors" class="invalid-feedback">
+                             <span *ngIf="InfoData.floor.errors.required">Floor is required.</span>
+                           </div>
+                         </div>
+
+
+                       </div>
+
+
+
+                        <div class="col-4">
+
+                          <div class="mb-3">
+                            <label for="livingSurface">Living Surface</label>
+                            <input id="livingSurface" name="livingSurface" type="number" class="form-control" formControlName="livingSurface"
+                                   [ngClass]="{'is-invalid': submitted2 && InfoData.livingSurface.errors}">
+                            <div *ngIf="submitted2 && InfoData.livingSurface.errors" class="invalid-feedback">
+                              <span *ngIf="InfoData.livingSurface.errors.required">Living surface is required.</span>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label for="TotalSurface">Total Surface</label>
+                            <input id="TotalSurface" name="TotalSurface" type="number" class="form-control" formControlName="totalSurface"
+                                   [ngClass]="{'is-invalid': submitted2 && InfoData.totalSurface.errors}">
+                            <div *ngIf="submitted2 && InfoData.totalSurface.errors" class="invalid-feedback">
+                              <span *ngIf="InfoData.totalSurface.errors.required">Total surface is required.</span>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="propertyAge">Property Age</label>
+                            <input id="propertyAge" name="propertyAge" type="number" class="form-control" formControlName="propertyAge"
+                                   [ngClass]="{'is-invalid': submitted2 && InfoData.propertyAge.errors}">
+                            <div *ngIf="submitted2 && InfoData.propertyAge.errors" class="invalid-feedback">
+                              <span *ngIf="InfoData.propertyAge.errors.required">Property age is required.</span>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="SyndicFees">Syndic Fees</label>
+                            <input id="SyndicFees" name="SyndicFees" type="number" class="form-control" formControlName="syndicFees"
+                                   [ngClass]="{'is-invalid': submitted2 && InfoData.syndicFees.errors}">
+                            <div *ngIf="submitted2 && InfoData.syndicFees.errors" class="invalid-feedback">
+                              <span *ngIf="InfoData.syndicFees.errors.required">Syndic fees are required.</span>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="CleaningFees">Cleaning Fees</label>
+                            <input id="CleaningFees" name="CleaningFees" type="number" class="form-control" formControlName="cleaningFees"
+                                   [ngClass]="{'is-invalid': submitted2 && InfoData.cleaningFees.errors}">
+                            <div *ngIf="submitted2 && InfoData.cleaningFees.errors" class="invalid-feedback">
+                              <span *ngIf="InfoData.cleaningFees.errors.required">Cleaning fees are required.</span>
+                            </div>
+                          </div>
+                        </div>
+                       <!-- <div class="d-flex align-items-start">
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>-->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                  <ul class="list-inline wizard mb-0">
+                  <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Previous</button>
+                  </li>
+                  <li class="next list-inline-item float-end"><button (click)="AnnounceInfoData()"  class="btn btn-primary" awNextStep>Next</button>
+                  </li>
+                </ul>
+              </aw-wizard-step>
+
+              <aw-wizard-step>
+                <ng-template awWizardStepSymbol>
+                  <i class="bx bxs-folder-plus"></i>
+                </ng-template>
+                <div class="row justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="text-center">
+                      <div class="form-group">
+                        <div class="mb-3">
+                          <label for="SelectCategorys" class="col-form-label">Select Category :</label>
+                          <select class="form-select SelectMember" id="SelectCategorys" name="selectedfish" >
+                            <option selected disabled>Select Category available</option>
+                            <option *ngFor="let cat of Categorys"  [value]="cat.id">
+                              {{ cat.name}}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="mb-3 justify-content-start">
+                          <label for="SelectSub-Category" class="col-form-label">Select Sub-Category :</label>
+                          <select class="form-select SelectMember" id="SelectSub-Category" name="Sub-Category" >
+                            <option selected disabled>Select Sub_Category available</option>
+                            <option *ngFor="let cat of SubCategorys"  [value]="cat.id">
+                              {{ cat.name}}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="card-title">Images</div>
+                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+                          <ngx-dropzone-label>
+                            <div>
+                              <h2>My custom dropzone</h2>
+                            </div>
+                          </ngx-dropzone-label>
+                          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                          </ngx-dropzone-image-preview>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-inline wizard mb-0">
+                  <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Previous</button>
+                  </li>
+                  <li class="next list-inline-item float-end"><button (click)="AnnounceInfoData()"  class="btn btn-primary" awNextStep>Next</button>
+                  </li>
+                </ul>
+              </aw-wizard-step>
+
+              <aw-wizard-step>
+                <ng-template awWizardStepSymbol>
+                  <i class="bx bxs-save"></i>
+                </ng-template>
+                <div class="row justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="text-center">
+                      <div class="form-group">
+                        <div class="mb-3">
+                          <label for="SelectCategory" class="col-form-label">Select Category :</label>
+                          <select class="form-select SelectMember" id="SelectCategory" name="category" >
+                            <option selected disabled>Select Category available</option>
+                            <option *ngFor="let cat of Categorys"  [value]="cat.id">
+                              {{ cat.name}}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="mb-3 ">
+                          <label for="SelectVille" class="col-form-label">Select Your City :</label>
+                          <select class="form-select" id="SelectVille" [(ngModel)]="selectedLocation">
+                            <option selected disabled>Sélectionner</option>
+                            <option *ngFor="let location of locations" [value]="location.id">
+                              {{ location.ville }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="checkDetails" class="col-form-label">Plus de détails :</label>
+                          <div class="card">
+                            <div class="card-body d-flex flex-wrap" id="checkDetails"> <!-- Use 'd-flex' and 'flex-wrap' for alignment and wrapping -->
+                              <!-- Iterate over Features and create a checkbox for each -->
+                              <div *ngFor="let feature of Features; let i = index" class="form-check form-check-inline"> <!-- 'form-check-inline' will keep them in line -->
+                                <!-- Bind the checkbox to a form control. Ensure you have a corresponding control in your FormGroup -->
+                                <input type="checkbox" [id]="'feature' + feature.id" class="form-check-input amenity-option" (change)="onCheckedFeatures(feature)" >
+                                <!-- The 'for' attribute must match the input 'id' -->
+                                <label [for]="'feature' + feature.id" class="form-check-label btn btn-outline-primary detail-button">{{ feature.name }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="checkTags" class="col-form-label">Tags :</label>
+                          <div class="card">
+                            <div class="card-body d-flex flex-wrap" id="checkTags">
+                              <div *ngFor="let tag of Tags; let i = index" class="form-check form-check-inline">
+                                <input type="checkbox" [id]="'tag' + tag.id" class="form-check-input amenity-option" (change)="onCheckedTags(tag)">
+                                <label [for]="'tag' + tag.id" class="form-check-label btn btn-outline-primary detail-button">{{ tag.name }}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-inline wizard mb-0">
+                  <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Previous</button>
+                  </li>
+                  <li class="next list-inline-item float-end"><button (click)="onSubmitGeneral()"  class="btn btn-primary" awNextStep>Next</button>
+                  </li>
+                </ul>
+              </aw-wizard-step>
+            </aw-wizard>
+          </div>
+        </div>
+      </div>
+</div>

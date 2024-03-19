@@ -37,7 +37,7 @@ export class AuthenticationService {
           // login successful if there's a jwt token in the response
           if (response && response.accessToken && response.refreshToken) {
             // retrieve the user info
-            this.me(response.accessToken).subscribe({
+            this.auth(response.accessToken).subscribe({
               next: (user: User) => {
                 authUtils.setLoggedCredentials(user, response);
               }
@@ -49,8 +49,8 @@ export class AuthenticationService {
       ));
   }
 
-  me(access_token: string): Observable<User> {
-    return this.http.get<User>(this.apiUrl + "me", {headers: {Authorization: `Bearer ${access_token}`}})
+  auth(access_token: string): Observable<User> {
+    return this.http.get<User>(this.apiUrl + "auth", {headers: {Authorization: `Bearer ${access_token}`}})
       .pipe(
         map((response: User) => {
           if (response) {
@@ -75,5 +75,22 @@ export class AuthenticationService {
       // logout the user
       authUtils.logout();
   }
+    
+    getRefreshToken(){
+    return authUtils.getRefrechToken();
+    }
+
+    refreshToken(refresh_token: string): Observable<JwtAuthenticationResponse> {
+      return this.http.post<JwtAuthenticationResponse>(this.apiUrl + "token/refresh", {}, {headers: {Authorization: `Bearer ${refresh_token}`}})
+        .pipe(
+          map((response: JwtAuthenticationResponse) => {
+            if (response) {
+              authUtils.setAccessToken(response.accessToken);
+            }
+            return response;
+          })
+        );
+    }
+  
 }
 

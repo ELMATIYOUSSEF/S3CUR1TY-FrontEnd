@@ -17,8 +17,9 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
-import {StoreModule} from "@ngrx/store";
-import {EffectsModule} from "@ngrx/effects";
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 
@@ -29,7 +30,8 @@ export function createTranslateLoader(http: HttpClient): any {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

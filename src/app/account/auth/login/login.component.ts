@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
   year: number = new Date().getFullYear();
 
   ngOnInit(): void {
-    document.body.classList.add('auth-body-bg')
+    document.body.classList.add('auth-body-bg');
     this.loginForm = this.formBuilder.group({
-      email: ['khalid@gmail.com', [Validators.required, Validators.email]],
+      email: ['youssef@gmail.com', [Validators.required, Validators.email]],
       password: ['password', [Validators.required]],
     });
 
@@ -47,18 +47,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  carouselOption: OwlOptions = {
-    items: 1,
-    loop: false,
-    margin: 0,
-    nav: false,
-    dots: true,
-    responsive: {
-      680: {
-        items: 1
-      },
-    }
-  }
+
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
@@ -71,6 +60,7 @@ export class LoginComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
+      console.log('invalid login form');
       return;
     } else {
       this.authenticationService.login(this.f.email.value, this.f.password.value)
@@ -79,7 +69,11 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/dashboard']);
           },
           error: error => {
-            this.error = error ? error : '';
+            if (error.status === 401) {
+              this.error = 'Invalid email or password';
+            } else {
+              this.error = 'An unexpected error occurred. Please try again later.';
+            }
           }
         });
     }

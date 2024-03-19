@@ -16,19 +16,37 @@ export const MENU: MenuItem[] = [
         }
     },
     {
-        id: 7,
+        id: 3,
         isLayout: true
     },
     {
-        id: 8,
+        id: 4,
         label: 'MENUITEMS.APPS.TEXT',
         isTitle: true,
     },
+    {
+        id: 5,
+        label: 'MENUITEMS.ANNOUNCE.TEXT',
+        icon: 'bx bxs-megaphone',
+        link: '/Announce',
+    },
   {
-    id: 9,
-    label: 'MENUITEMS.TASK.TEXT',
-    icon: 'bx-task',
-    link: '/task',
+    id: 6,
+    label: 'MENUITEMS.ANNOUNCEDETAILS.TEXT',
+    icon: 'bx bx-git-repo-forked',
+    link: '/Announce/details',
+  },
+  {
+    id: 7,
+    label: 'MENUITEMS.ANNOUNCEREVIEW.TEXT',
+    icon: 'bx bx-message-rounded',
+    link: '/Announce/review',
+  },
+  {
+    id: 8,
+    label: 'MENUITEMS.ANNOUNCENOTIFICATION.TEXT',
+    icon: 'bx bxs-notification',
+    link: '/Announce/notification',
   },
 ];
 

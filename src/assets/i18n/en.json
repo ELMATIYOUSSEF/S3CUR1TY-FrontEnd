@@ -91,11 +91,20 @@
     "APPS": {
       "TEXT": "Apps"
     },
-    "COMPETITION": {
-      "TEXT": "Competition"
+    "ANNOUNCE": {
+      "TEXT": "ANNOUNCE",
+      "BADGE": "New"
     },
-    "TASK": {
-      "TEXT": "task",
+    "ANNOUNCEDETAILS": {
+      "TEXT": "ANNOUNCE-DETAILS",
+      "BADGE": "New"
+    },
+    "ANNOUNCEREVIEW": {
+      "TEXT": "REVIEW",
+      "BADGE": "New"
+    },
+    "ANNOUNCENOTIFICATION": {
+      "TEXT": "NOTIFICATION",
       "BADGE": "New"
     },
     "FILEMANAGER": {

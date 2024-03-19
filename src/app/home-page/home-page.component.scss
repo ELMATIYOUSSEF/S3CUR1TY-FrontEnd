@@ -1,0 +1,61 @@
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  overflow: hidden;
+}
+.navbar-brand {
+  font-weight: bold;
+}
+.nav-link {
+  color: #333;
+}
+.nav-link:hover {
+  color: #000;
+}
+.btn-outline-primary {
+  color: #0c0c0c;
+}
+.btn-outline-primary:hover {
+  background-color: #fff;
+  color: #fff;
+}
+.navbar .fa, .navbar .fas {
+  margin-right: 8px;
+  overflow: hidden;
+}
+body{
+  overflow-x: hidden;
+}
+#main-content {
+  min-height: 100vh; /* Adjusted height to push the footer to the bottom */
+  padding-bottom: 150px; /* Equal to or greater than the footer height */
+}
+.section-home {
+  min-height: calc(100vh - 56px - 50px); /* Adjust for your navbar and footer heights */
+  background: url('https://cdn.pixabay.com/photo/2019/07/22/15/19/hobbiton-4355347_1280.jpg') no-repeat center center/cover; /* Adjust with your image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Needed to position the overlay correctly */
+  z-index: 0; /* Ensure this is under any positioned content */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  z-index: 1; /* Above the background, below the content */
+}
+.zindex-2 {
+  z-index: 2; /* Ensure this content is above the overlay */
+}
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+a.text-white:hover {
+  opacity: 0.8; /* Slightly fade text on hover for a subtle effect */
+}
+

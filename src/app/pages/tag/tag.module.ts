@@ -15,7 +15,7 @@ import {ListTagComponent} from "./list-tag/list-tag.component";
   imports: [
     SharedModule,
     TagRoutingModule,
-    StoreModule.forFeature('tasks', {}),
+    StoreModule.forFeature('', {}),
     UIModule,
     NgbPaginationModule,
   ],

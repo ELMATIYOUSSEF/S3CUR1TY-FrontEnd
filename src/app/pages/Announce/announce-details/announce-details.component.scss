@@ -1,0 +1,17 @@
+.card {
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for depth */
+  overflow: hidden; /* Ensure the border-radius clips the content */
+  width: 100%; /* Optional: you might want to set a max-width */
+  max-width: 1200px; /* Max width of the card */
+}
+.card-body{
+  width: 100%; /* Optional: you might want to set a max-width */
+  max-width: 1200px; /* Max width of the card */
+}
+th.align-right {
+  text-align: right;
+}
+td.align-right {
+  text-align: right;
+}
